@@ -17,6 +17,10 @@ services:
       dockerfile: Dockerfile # Dockerfile is in the next
     ports:
       - "3000:3000"
+    volumes:
+      - ./next-poc/src:/app/src
+      - ./next-poc/public:/app/public
+      - ./next-poc/package.json:/app/package.json
     command: bash -c "pnpm install && pnpm run build && pnpm run start"
 
   svelte-app:
@@ -25,4 +29,8 @@ services:
       dockerfile: Dockerfile # Dockerfile is in the svelte
     ports:
       - "5000:3000"
+    volumes:
+      - ./svelte-poc/src:/app/src
+      - ./svelte-poc/static:/app/static
+      - ./svelte-poc/package.json:/app/package.json
     command: bash -c "pnpm install && pnpm run build && node build"

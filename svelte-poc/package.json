@@ -1,6 +1,11 @@
 {
 	"name": "svelte-poc",
 	"version": "0.0.1",
+	"pnpm": {
+		"overrides": {
+			"rollup": "npm:@rollup/wasm-node"
+		}
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
