@@ -1,7 +1,18 @@
-<script>
+<script lang="ts">
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import { onMount } from 'svelte';
+
+	let token: any = null;
+	onMount(() => {
+		localStorage.setItem('auth_token_from_svelte', 'zyxwvutsrqponmlkjihgfedcba0987654321');
+		const fromNext = localStorage.getItem('auth_token_from_next');
+		console.log('auth_token_from_next', fromNext);
+		if (fromNext) {
+			token = fromNext;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -10,22 +21,15 @@
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+	<h1>Token from Next: {token}</h1>
+	<a href="/">Go to Next Page</a>
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<span class="welcome">
+		<picture>
+			<source srcset={welcome} type="image/webp" />
+			<img src={welcome_fallback} alt="Welcome" />
+		</picture>
+	</span>
 </section>
 
 <style>
