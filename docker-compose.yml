@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - nextjs-app
+      - svelte-app
+
+  nextjs-app:
+    build:
+      context: ./next-poc
+      dockerfile: Dockerfile # Dockerfile is in the next
+    ports:
+      - "3000:3000"
+    command: bash -c "pnpm install && pnpm run build && pnpm run start"
+
+  svelte-app:
+    build:
+      context: ./svelte-poc
+      dockerfile: Dockerfile # Dockerfile is in the svelte
+    ports:
+      - "5000:3000"
+    command: bash -c "pnpm install && pnpm run build && node build"
