@@ -3,15 +3,29 @@
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import { onMount } from 'svelte';
+	import Cookies from 'js-cookie';
 
-	let token: any = null;
+	let localStorageTokenSvelte: any = null;
+	let cookieTokenSvelte: any = null;
+	let localStorageTokenFromNext: any = null;
+	let cookieTokenFromNext: any = null;
+
 	onMount(() => {
-		localStorage.setItem('auth_token_from_svelte', 'zyxwvutsrqponmlkjihgfedcba0987654321');
-		const fromNext = localStorage.getItem('auth_token_from_next');
-		console.log('auth_token_from_next', fromNext);
-		if (fromNext) {
-			token = fromNext;
+		// SET TOKEN INTO LOCALSTORAGE AND COOKIE BY SVELTE
+		localStorage.setItem('auth_token_from_svelte', 'localStorage_token_by_svelte_3333333333');
+		const tokenOfSvelte = localStorage.getItem('auth_token_from_svelte');
+		if (tokenOfSvelte) {
+			localStorageTokenSvelte = tokenOfSvelte;
 		}
+		Cookies.set('cookie_auth_token_from_svelte', 'cookie_token_by_svelte_444444444');
+		cookieTokenSvelte = Cookies.get('cookie_auth_token_from_svelte');
+
+		// GET TOKEN FROM NEXT
+		const fromNext = localStorage.getItem('auth_token_from_next');
+		if (fromNext) {
+			localStorageTokenFromNext = fromNext;
+		}
+		cookieTokenFromNext = Cookies.get('cookie_auth_token_from_next');
 	});
 </script>
 
@@ -21,43 +35,24 @@
 </svelte:head>
 
 <section>
-	<h1>Token from Next: {token}</h1>
+	<h1>
+		Token set into localStorage by Svelte:::: <strong>{localStorageTokenSvelte}</strong>
+	</h1>
+	<h1>
+		Token set into Cookie by Svelte::::{' '}
+		<strong>{cookieTokenSvelte}</strong>
+	</h1>
+	<h1>================================</h1>
+	<h3>
+		Token from Next (LocalStorage)::::{' '}
+		<strong>{localStorageTokenFromNext || 'n/a'}</strong>
+	</h3>
+	<h3>
+		Token from Next (Cookie)::::{' '}
+		<strong>{cookieTokenFromNext || 'n/a'}</strong>
+	</h3>
 	<a href="/">Go to Next Page</a>
-
-	<span class="welcome">
-		<picture>
-			<source srcset={welcome} type="image/webp" />
-			<img src={welcome_fallback} alt="Welcome" />
-		</picture>
-	</span>
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
 </style>
