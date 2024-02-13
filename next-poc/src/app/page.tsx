@@ -47,7 +47,7 @@ export default function Home() {
         Token from Svelte (Cookie)::::{" "}
         <strong>{cookies.cookie_auth_token_from_svelte || "n/a"}</strong>
       </h3>
-      <a href="/v1/">Go to Svelte Page</a>
+      <a href="/s/">Go to Svelte Page</a>
     </main>
   );
 }

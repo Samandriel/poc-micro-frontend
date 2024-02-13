@@ -7,8 +7,10 @@
 
 	let localStorageTokenSvelte: any = null;
 	let cookieTokenSvelte: any = null;
-	let localStorageTokenFromNext: any = null;
-	let cookieTokenFromNext: any = null;
+	// let localStorageTokenFromNext: any = null;
+	// let cookieTokenFromNext: any = null;
+	let localStorageTokenEmerge: any = null;
+	let cookieTokenFromEmerge: any = null;
 
 	onMount(() => {
 		// SET TOKEN INTO LOCALSTORAGE AND COOKIE BY SVELTE
@@ -21,11 +23,18 @@
 		cookieTokenSvelte = Cookies.get('cookie_auth_token_from_svelte');
 
 		// GET TOKEN FROM NEXT
-		const fromNext = localStorage.getItem('auth_token_from_next');
-		if (fromNext) {
-			localStorageTokenFromNext = fromNext;
+		// const fromNext = localStorage.getItem('auth_token_from_next');
+		// if (fromNext) {
+		// 	localStorageTokenFromNext = fromNext;
+		// }
+		// cookieTokenFromNext = Cookies.get('cookie_auth_token_from_next');
+
+		// GET TOKEN FROM EMERGE STAGING
+		const fromEmerge = localStorage.getItem('token');
+		if (fromEmerge) {
+			localStorageTokenEmerge = fromEmerge;
 		}
-		cookieTokenFromNext = Cookies.get('cookie_auth_token_from_next');
+		cookieTokenFromEmerge = Cookies.get('rl_user_id');
 	});
 </script>
 
@@ -42,7 +51,7 @@
 		Token set into Cookie by Svelte::::{' '}
 		<strong>{cookieTokenSvelte}</strong>
 	</h1>
-	<h1>================================</h1>
+	<!-- <h1>================================</h1>
 	<h3>
 		Token from Next (LocalStorage)::::{' '}
 		<strong>{localStorageTokenFromNext || 'n/a'}</strong>
@@ -50,8 +59,17 @@
 	<h3>
 		Token from Next (Cookie)::::{' '}
 		<strong>{cookieTokenFromNext || 'n/a'}</strong>
+	</h3> -->
+	<h1>================================</h1>
+	<h3>
+		Token from Emerge (LocalStorage)::::{' '}
+		<strong>{localStorageTokenEmerge || 'n/a'}</strong>
 	</h3>
-	<a href="/">Go to Next Page</a>
+	<h3>
+		Token from Emerge (Cookie)::::{' '}
+		<strong>{cookieTokenFromEmerge || 'n/a'}</strong>
+	</h3>
+	<a href="/">Go to Emerge</a>
 </section>
 
 <style>

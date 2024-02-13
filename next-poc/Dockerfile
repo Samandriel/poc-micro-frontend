@@ -2,7 +2,7 @@
 FROM node:latest
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /app/next-poc
 
 # Install pnpm
 RUN npm install -g pnpm

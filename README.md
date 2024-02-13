@@ -26,5 +26,5 @@ docker-compose up
 1. The `docker-compose.yml` file defines the services to be used in the development environment.
 2. The `nginx` service is used as a reverse proxy to route requests to the different frontend projects.
 3. Both Svelte and NextJS is hosted as Server Side Rendering (SSR).
-4. NextJS will be served at root path `/` and Svelte will be served at `/v1`.
+4. NextJS will be served at root path `/` and Svelte will be served at `/s`.
 5. The nginx is configured to run on port 80 and can be accessed at `http://localhost`.
